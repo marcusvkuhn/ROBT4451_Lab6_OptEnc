@@ -35,7 +35,6 @@ void main(void){
 	usciB1SpiInit(1,1,0x02,0);
 
 
-
 	//testEncoder();
     int clrLenght;
 
