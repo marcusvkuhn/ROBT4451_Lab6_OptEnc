@@ -42,11 +42,11 @@ void main(void){
 
     numEdges = 0;
     char speedStr[8];
-    long double angSpeed;
-    long double angSpeedNum;
-    long double angSpeedDen;
+    double angSpeed;
+    double angSpeedNum;
+    double angSpeedDen;
 
-    angSpeedNum = (SMCLK*0.33*2*M_PI)*0.01;
+    angSpeedNum = (SMCLK*2*M_PI)*0.01;
 
 
     // enable global interrupts (SR.GIE bit)
@@ -62,24 +62,14 @@ void main(void){
 
             usciA1UartTxChar('\r');                         // returns to beginning of line
 
-            sprintf(posStr, "%d", posCount);
-
-            usciA1UartTxString("posCount = ");
-
-            usciA1UartTxString(posStr);
-
-//            if(speedCalc){
-            angSpeedDen = (pulseDelta*0.01) * 2300;
+            angSpeedDen = (pulseDelta*0.01) * 1150;
             angSpeed = angSpeedNum / angSpeedDen;
-//                angSpeed = (SMCLK*2*M_PI)/(pulseDelta*P_REV_Q);
-                sprintf(speedStr, "%.2lf", angSpeed);
-                usciA1UartTxString(" | angSpeed = ");
-                usciA1UartTxString(speedStr);
-                speedCalc = 0;
-//            }
-//            usciA1UartTxChar('\r');
+//          angSpeed = (SMCLK*2*M_PI)/(pulseDelta*P_REV_Q);
+            sprintf(speedStr, "posCount = %d, angSpeed = %.2f", posCount, angSpeed);
+            usciA1UartTxString(speedStr);
+            speedCalc = 0;
 
-//            usciB1SpiTxBuffer(&posCount, 2);
+            //            usciB1SpiTxBuffer(&posCount, 2);
 
             screenWrite = 0;                                // reset enabler to write data to screen
         }
