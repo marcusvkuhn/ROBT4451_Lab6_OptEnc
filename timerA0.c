@@ -23,7 +23,7 @@
 void timerA0Init(void){
 
         // clk select: SMCLK | input divider: 1 | mode control: continuous | clear clk | enable interrupts
-        TA0CTL = TASSEL_2 | ID_3 | MC_2 | TACLR;
+        TA0CTL = TASSEL_2 | ID_0 | MC_2 | TACLR;
         // expansion clk divider to 1
         TA0EX0 |= TAIDEX_0;
         // Capture on L->H & H->L: 11b | capture mode: 1b | Sync to SMCLK | choose CCI1A
@@ -41,7 +41,7 @@ __interrupt void TIMERA0_ISR(void){
     if(numEdges == 1)
         pulseStart = TA0CCR1;
     else if(numEdges == 2){
-        speedCalc = 1;
+//        speedCalc = 1;
         pulseDelta = TA0CCR1 - pulseStart;
         TA0CTL |= TACLR;
         numEdges = 0;

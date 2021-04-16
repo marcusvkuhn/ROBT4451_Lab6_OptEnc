@@ -50,6 +50,9 @@ __interrupt void PORT2_ISR(void) {
             break;
         case 0x0A:                          // P2.4 Interrupt, no break here, case A and C share the same code
         case 0x0C:                          // P2.5 Interrupt
+
+            if (posCount > 4600 || posCount < -4600)
+                    posCount = 0;
             //update previous state
             prevState = currState;
             //update current state, right shift
